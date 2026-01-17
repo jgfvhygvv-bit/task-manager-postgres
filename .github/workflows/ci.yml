@@ -81,14 +81,12 @@ jobs:
         POSTGRES_DB: testdb
       run: |
         echo "🚀 Testing application startup..."
-        timeout 10s python -c "
-import sys
+        timeout 10s python -c "import sys
 sys.path.insert(0, '.')
 from app import create_app
 app = create_app('testing')
 print('✅ Application created successfully')
-print('✅ Database URI:', app.config['SQLALCHEMY_DATABASE_URI'])
-        " || echo "✅ Application startup test completed"
+print('✅ Database URI:', app.config['SQLALCHEMY_DATABASE_URI'])" || echo "✅ Application startup test completed"
     
     - name: 📊 Upload test coverage
       uses: codecov/codecov-action@v3
