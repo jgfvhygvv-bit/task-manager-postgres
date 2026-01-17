@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Создать задачу - Task Manager{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">➕ Создать новую задачу</h2>
+
+<div class="card">
+    <div class="card-body">
+        <form method="POST" action="{{ url_for('create_task') }}">
+            <div class="mb-3">
+                <label for="title" class="form-label">Название задачи *</label>
+                <input type="text" class="form-control" id="title" name="title" required
+                    placeholder="Введите название задачи">
+                <div class="form-text">Обязательное поле</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Описание</label>
+                <textarea class="form-control" id="description" name="description" rows="3"
+                    placeholder="Добавьте описание задачи (необязательно)"></textarea>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a href="/tasks" class="btn btn-secondary me-md-2">← Назад к задачам</a>
+                <button type="submit" class="btn btn-primary">💾 Сохранить в PostgreSQL</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="mt-4 alert alert-info">
+    <h6>ℹ️ Информация</h6>
+    <p>Задача будет сохранена в базе данных PostgreSQL в таблице <code>tasks</code>.</p>
+</div>
+{% endblock %}

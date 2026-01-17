@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+        <h1 class="display-4 mb-4">Task Manager с PostgreSQL</h1>
+        <p class="lead mb-4">Полнофункциональное приложение для управления задачами с использованием PostgreSQL</p>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">🎯 Возможности</h5>
+                <div class="row mt-3">
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6>🌐 Веб-интерфейс</h6>
+                                <p>Удобное управление задачами</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6>🐘 PostgreSQL</h6>
+                                <p>Надежное хранение данных</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6>🧪 Тесты</h6>
+                                <p>Полное покрытие тестами</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6>⚙️ CI/CD</h6>
+                                <p>Автоматическое тестирование</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <a href="/tasks" class="btn btn-primary btn-lg me-3">📋 Посмотреть задачи</a>
+            <a href="/tasks/create" class="btn btn-success btn-lg">➕ Создать задачу</a>
+        </div>
+
+        <div class="mt-5">
+            <h4>📡 API Endpoints</h4>
+            <div class="list-group mt-3">
+                <div class="list-group-item">
+                    <code>GET /api/health</code> - Проверка здоровья (PostgreSQL подключение)
+                </div>
+                <div class="list-group-item">
+                    <code>GET /api/tasks</code> - Получить все задачи (JSON)
+                </div>
+                <div class="list-group-item">
+                    <code>POST /api/tasks</code> - Создать задачу
+                </div>
+                <div class="list-group-item">
+                    <code>DELETE /api/tasks/{id}</code> - Удалить задачу
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4 alert alert-info">
+            <h5>📊 База данных: PostgreSQL</h5>
+            <p>Используется промышленная СУБД PostgreSQL с SQLAlchemy ORM</p>
+            <p>Таблица: <code>tasks</code> с полями: id, title, description, status, created_at, updated_at</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

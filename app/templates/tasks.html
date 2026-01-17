@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Мои задачи - Task Manager{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">📋 Мои задачи (PostgreSQL)</h2>
+
+<a href="/tasks/create" class="btn btn-primary mb-4">➕ Создать новую задачу</a>
+
+{% if tasks %}
+<div class="list-group">
+    {% for task in tasks %}
+    <div class="list-group-item task-card {% if task.status == 'completed' %}completed{% endif %}">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h5 class="mb-1">{{ task.title }}</h5>
+                <p class="mb-1">{{ task.description or "Нет описания" }}</p>
+                <small class="text-muted">
+                    Создано: {{ task.created_at.strftime('%d.%m.%Y %H:%M') }}
+                    {% if task.updated_at != task.created_at %}
+                    | Обновлено: {{ task.updated_at.strftime('%d.%m.%Y %H:%M') }}
+                    {% endif %}
+                </small>
+            </div>
+            <div class="task-actions">
+                <span class="badge bg-{% if task.status == 'completed' %}success{% else %}warning{% endif %} me-2">
+                    {{ 'Завершено' if task.status == 'completed' else 'В работе' }}
+                </span>
+
+                <form action="{{ url_for('toggle_task', task_id=task.id) }}" method="POST" class="d-inline">
+                    <button type="submit"
+                        class="btn btn-sm btn-{% if task.status == 'completed' %}warning{% else %}success{% endif %}">
+                        {{ 'Вернуть в работу' if task.status == 'completed' else 'Завершить' }}
+                    </button>
+                </form>
+
+                <form action="{{ url_for('delete_task', task_id=task.id) }}" method="POST" class="d-inline"
+                    onsubmit="return confirm('Удалить эту задачу?')">
+                    <button type="submit" class="btn btn-sm btn-danger">🗑️ Удалить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-info">
+    📭 У вас пока нет задач. <a href="/tasks/create">Создайте первую задачу!</a>
+</div>
+{% endif %}
+
+<div class="mt-4 alert alert-secondary">
+    <h6>💾 Хранение в PostgreSQL</h6>
+    <p>Все задачи хранятся в базе данных PostgreSQL. Данные сохраняются между перезапусками приложения.</p>
+</div>
+{% endblock %}
