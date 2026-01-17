@@ -68,8 +68,6 @@ jobs:
         POSTGRES_DB: testdb
       run: |
         python -c "
-import sys
-sys.path.insert(0, '.')
 try:
     from app import create_app
     app = create_app('testing')
